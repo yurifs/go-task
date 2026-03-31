@@ -1,0 +1,54 @@
+<form class="bg-white rounded-xl overflow-hidden">
+  <div class="flex items-center gap-1 p-4">
+    <img src="images/icon-new-task.svg" />
+
+    <h1 class="font-bold text-lg">Criar tarefa</h1>
+
+    <img class="ml-auto cursor-pointer" src="images/icon-close.svg" />
+  </div>
+
+  <div class="flex flex-col gap-4 border-y border-[#D1D5DB] p-4">
+    <div>
+      <p class="font-semibold text-sm mb-2">Nome</p>
+
+      <input
+        class="border border-[#D1D5DB] rounded-lg font-light text-sm text-[#89919F] w-full p-3"
+        type="text"
+        placeholder="Descreva o que deverá ser feito"
+      />
+
+      <p class="font-semibold text-xs text-red-500">
+        O campo é obrigatório e precisa ter no mínimo 10 caracteres.
+      </p>
+    </div>
+
+    <div>
+      <p class="font-semibold text-sm mb-2">Descrição</p>
+
+      <input
+        class="border border-[#D1D5DB] rounded-lg font-light text-sm text-[#89919F] w-full p-3"
+        type="text"
+        placeholder="Adicione uma descrição"
+      />
+
+      <p class="font-semibold text-xs text-red-500">
+        O campo é obrigatório e precisa ter no mínimo 10 caracteres.
+      </p>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-2 p-4">
+    <button
+      class="bg-[#FAFAFA] rounded-xl font-semibold text-sm py-3 px-4 cursor-pointer active:translate-y-1 transition-transform duration-75"
+      type="button"
+    >
+      Cancelar
+    </button>
+    <button
+      class="bg-[#2A89EF] rounded-xl font-semibold text-sm text-white py-3 px-4 cursor-pointer active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50"
+      type="submit"
+    >
+      Criar uma tarefa
+    </button>
+  </div>
+</form>

@@ -1,0 +1,56 @@
+<div class="flex p-3 mb-6 overflow-x-auto scrollbar-hidden">
+  <!-- Coluna A Fazer -->
+  <div class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60">
+    <div class="flex items-center gap-1 border-b border-[#D1D5DB] py-2">
+      <h1 class="font-bold">A fazer</h1>
+      <span
+        class="text-white text-xs font-semibold rounded-xl bg-black py-1 px-2"
+        >1</span
+      >
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <app-task-card />
+
+      <app-task-card />
+
+      <app-task-card />
+    </div>
+  </div>
+  <!-- Coluna Fazendo -->
+  <div class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60">
+    <div class="flex items-center gap-1 border-b border-[#D1D5DB] py-2">
+      <h1 class="font-bold">Fazendo</h1>
+      <span
+        class="text-white text-xs font-semibold rounded-xl bg-[#FF850A] py-1 px-2"
+        >1</span
+      >
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <app-task-card />
+
+      <app-task-card />
+    </div>
+  </div>
+  <!-- Coluna Concluído -->
+  <div class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60">
+    <div class="flex items-center gap-1 border-b border-[#D1D5DB] py-2">
+      <h1 class="font-bold">Concluído</h1>
+      <span
+        class="text-white text-xs font-semibold rounded-xl bg-[#15BE78] py-1 px-2"
+        >1</span
+      >
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <app-task-card />
+    </div>
+  </div>
+</div>
+
+<div class="bg-[#FAFAFA] rounded-sm border-l-4 border-black py-3 px-5">
+  <p class="font-semibold text-lg text-[#9CA3AF]">
+    Nenhuma tarefa disponível no momento.
+  </p>
+</div>
