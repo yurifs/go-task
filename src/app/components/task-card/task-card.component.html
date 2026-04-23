@@ -1,16 +1,25 @@
 <div class="flex flex-col gap-3 bg-[#FAFAFA] rounded-xl p-3 cursor-grab">
   <div class="flex gap-1">
-    <p class="font-bold">Minha nova tarefa</p>
+    <p class="font-bold" [title]="task.name">
+      {{
+        task.name.length < 13 ? task.name : (task.name | slice: 0 : 13) + "..."
+      }}
+    </p>
 
     <img
       class="self-start cursor-pointer ml-auto"
       src="images/icon-delete.svg"
       alt="Delete task"
+      (click)="deleteTask()"
     />
   </div>
 
-  <p class="font-light text-sm">
-    Essa é a minha tarefa para criar uma aplicação Angular...
+  <p class="font-light text-sm" [title]="task.description">
+    {{
+      task.description.length < 20
+        ? task.description
+        : (task.description | slice: 0 : 20) + "..."
+    }}
   </p>
 
   <div class="flex items-center gap-1">
@@ -18,12 +27,14 @@
 
     <p
       class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer"
+      (click)="openTaskCommentsModal()"
     >
-      2 comentários
+      {{ task.comments.length }} comentários
     </p>
 
     <p
       class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer ml-auto"
+      (click)="openEditTaskModal()"
     >
       Editar
     </p>

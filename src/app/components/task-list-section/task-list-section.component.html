@@ -1,56 +1,92 @@
+@let todoTasks = (this._taskService.todoTasks | async) ?? [];
+@let doingTasks = (this._taskService.doingTasks | async) ?? [];
+@let doneTasks = (this._taskService.doneTasks | async) ?? [];
+
+@let noTasksCreated = todoTasks.length === 0 && doingTasks.length === 0 && doneTasks.length === 0;
+
+<p>TODO: {{ this._taskService.todoTasks | async | json }}</p>
+<p>DOING: {{ this._taskService.doingTasks | async | json }}</p>
+<p>DONE: {{ this._taskService.doneTasks | async | json }}</p>
+
 <div class="flex p-3 mb-6 overflow-x-auto scrollbar-hidden">
   <!-- Coluna A Fazer -->
-  <div class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60">
+  <div
+    cdkDropList
+    id="to-do-column"
+    #todoListCdkDropList="cdkDropList"
+    [cdkDropListData]="todoTasks"
+    [cdkDropListConnectedTo]="[doingListCdkDropList, doneListCdkDropList]"
+    (cdkDropListDropped)="onCardDrop($event)"
+    class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60"
+  >
     <div class="flex items-center gap-1 border-b border-[#D1D5DB] py-2">
       <h1 class="font-bold">A fazer</h1>
       <span
         class="text-white text-xs font-semibold rounded-xl bg-black py-1 px-2"
-        >1</span
+        >{{ todoTasks.length }}</span
       >
     </div>
 
     <div class="flex flex-col gap-4">
-      <app-task-card />
-
-      <app-task-card />
-
-      <app-task-card />
+      @for (todoTask of todoTasks; track todoTask.id) {
+        <app-task-card cdkDrag [cdkDragData]="todoTask" [task]="todoTask" />
+      }
     </div>
   </div>
   <!-- Coluna Fazendo -->
-  <div class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60">
+  <div
+    cdkDropList
+    id="doing-column"
+    #doingListCdkDropList="cdkDropList"
+    [cdkDropListData]="doingTasks"
+    [cdkDropListConnectedTo]="[todoListCdkDropList, doneListCdkDropList]"
+    (cdkDropListDropped)="onCardDrop($event)"
+    class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60"
+  >
     <div class="flex items-center gap-1 border-b border-[#D1D5DB] py-2">
       <h1 class="font-bold">Fazendo</h1>
       <span
         class="text-white text-xs font-semibold rounded-xl bg-[#FF850A] py-1 px-2"
-        >1</span
+        >{{ doingTasks.length }}</span
       >
     </div>
 
     <div class="flex flex-col gap-4">
-      <app-task-card />
-
-      <app-task-card />
+      @for (doingTask of doingTasks; track doingTask.id) {
+        <app-task-card cdkDrag [cdkDragData]="doingTask" [task]="doingTask" />
+      }
     </div>
   </div>
   <!-- Coluna Concluído -->
-  <div class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60">
+  <div
+    cdkDropList
+    id="done-column"
+    #doneListCdkDropList="cdkDropList"
+    [cdkDropListData]="doneTasks"
+    [cdkDropListConnectedTo]="[todoListCdkDropList, doingListCdkDropList]"
+    (cdkDropListDropped)="onCardDrop($event)"
+    class="flex flex-col flex-1 gap-6 py-3 px-6 min-w-60"
+  >
     <div class="flex items-center gap-1 border-b border-[#D1D5DB] py-2">
       <h1 class="font-bold">Concluído</h1>
       <span
         class="text-white text-xs font-semibold rounded-xl bg-[#15BE78] py-1 px-2"
-        >1</span
+        >{{ doneTasks.length }}</span
       >
     </div>
 
     <div class="flex flex-col gap-4">
-      <app-task-card />
+      @for (doneTask of doneTasks; track doneTask.id) {
+        <app-task-card cdkDrag [cdkDragData]="doneTask" [task]="doneTask" />
+      }
     </div>
   </div>
 </div>
 
-<div class="bg-[#FAFAFA] rounded-sm border-l-4 border-black py-3 px-5">
-  <p class="font-semibold text-lg text-[#9CA3AF]">
-    Nenhuma tarefa disponível no momento.
-  </p>
-</div>
+@if(noTasksCreated) {
+  <div class="bg-[#FAFAFA] rounded-sm border-l-4 border-black py-3 px-5">
+    <p class="font-semibold text-lg text-[#9CA3AF]">
+      Nenhuma tarefa disponível no momento.
+    </p>
+  </div>
+}
